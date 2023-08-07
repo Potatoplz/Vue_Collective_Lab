@@ -7,13 +7,14 @@
 ###
 @train-stop-all = /api/train-stop-all
 @train-schedule = /api/train-schedule
+@train-time = /api/train-time
+@train-fare = /api/train-fare
+@train-rest-seat = /api/train-rest-seat
 
 ###
 POST  https://{{host}}{{train-stop-all}} HTTP/1.1
 Content-Type: application/json, text/plain, */*
-
 {}
-
 
 ###
 POST  https://{{host}}{{train-schedule}} HTTP/1.1
@@ -33,3 +34,55 @@ Accept-Encoding: gzip, deflate, br
 }
 
 ###
+POST  https://{{host}}{{train-time}} HTTP/1.1
+Content-Type: {{contentType}}
+Accept: {{Accept}}
+Accept-Encoding: gzip, deflate, br
+
+{
+  //"transferStopCode": "0010", //isTransfer가 true인 경우
+  "runDate": "20230807",
+  "trainNumber": "00043",
+  "isFirstTrain": true,
+  "departureStopCode": "0001",
+  "arrivalStopCode": "0020",
+  "isTransfer": false,
+  "railwayCompany": "KORAIL"
+}
+
+###
+POST  https://{{host}}{{train-fare}} HTTP/1.1
+Content-Type: {{contentType}}
+Accept: {{Accept}}
+Accept-Encoding: gzip, deflate, br
+
+{
+  "changeTrainDivisionCode": "1",
+  "trainNumber": "00043",
+  "arrivalStopCode": "0010",
+  "departureStopCode": "0001",
+  "runDate": "20230807",
+  "seatAttrCode": "015",
+  "railwayCompany": "KORAIL"
+}
+###
+POST  https://{{host}}{{train-rest-seat}} HTTP/1.1
+Content-Type: {{contentType}}
+Accept: {{Accept}}
+Accept-Encoding: gzip, deflate, br
+
+{
+  "arrivalStopCode": "0017",
+  "arrivalStopRunOrder": "000005",
+  "departureDate": "20230808",
+  "departureStopCode": "0001",
+  "departureStopRunOrder": "000001",
+  "departureTime": "050200",
+  "passengerRoomClassCode": "1",
+  "reqSeatCount": "0001",
+  "runDate": "20230808",
+  "seatAttrCode": "015",
+  "trainGroupCode": "100",
+  "trainNumber": "00201",
+  "railwayCompany": "KORAIL"
+}
