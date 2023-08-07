@@ -1,0 +1,35 @@
+@hostname = pt.map.naver.com
+@port = 443
+@host = {{hostname}}:{{port}}
+@contentType = application/json;charset=UTF-8
+@Accept = application/json, text/plain, */*
+
+###
+@train-stop-all = /api/train-stop-all
+@train-schedule = /api/train-schedule
+
+###
+POST  https://{{host}}{{train-stop-all}} HTTP/1.1
+Content-Type: application/json, text/plain, */*
+
+{}
+
+
+###
+POST  https://{{host}}{{train-schedule}} HTTP/1.1
+Content-Type: {{contentType}}
+Accept: {{Accept}}
+Accept-Encoding: gzip, deflate, br
+
+{
+  "departureDate": "20230807",
+  "departureTime": "133100",
+  "departureStopCode": "0001",
+  "arrivalStopCode": "0020",
+  "changeTrainDivisionCode": "1",
+  "trainGroupCode": "109",
+  "seatAttrCode": "015",
+  "passengerCount": "1"
+}
+
+###
